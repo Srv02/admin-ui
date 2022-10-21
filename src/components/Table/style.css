@@ -1,0 +1,89 @@
+.selectedRow {
+  background-color: #b3a1a1 !important;
+}
+.delete {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.edit {
+  cursor: pointer;
+}
+.icon {
+  height: 24px;
+}
+table,
+tr,
+th,
+td {
+  border: none;
+  border-collapse: collapse;
+  padding: 8px 15px;
+  vertical-align: middle;
+}
+
+input[type="text"] {
+  /* width: 100%; */
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.searchInput {
+  width: 300px;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+.container {
+  width: 100%;
+  margin-top: 20px;
+}
+.tableStyle {
+  width: 100%;
+}
+.table-container {
+  min-height: 480px;
+}
+.checkboxColumn {
+  width: 10%;
+}
+.actionColumn {
+  width: 15%;
+}
+.fieldColumn {
+  width: 25%;
+}
+tr:nth-of-type(odd) {
+  background-color: #f4eaea;
+}
+.deleteSelectedBtn {
+  background-color: #ff5171;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+.deleteSelectedBtn:disabled {
+  opacity: 0.5;
+}
+.deleteButtonContainer {
+  width: 10%;
+}
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.delete {
+  margin-left: 5px;
+}
