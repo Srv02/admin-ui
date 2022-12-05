@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "./pagination.css";
 const Pagination = (props) => {
   const { page, rowsPerPage, operations, length } = props;
   const totalPage = Math.ceil(length / rowsPerPage);
