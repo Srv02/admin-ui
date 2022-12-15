@@ -51,7 +51,11 @@ const EditableRow = ({ item, submitData, deleteEntry }) => {
         <span className="edit" onClick={saveData} title="save">
           <img src={saveIcon} alt="" className="icon" />
         </span>
-        <span className="delete" onClick={() => deleteEntry(item.id)} title="delete">
+        <span
+          className="delete"
+          onClick={() => deleteEntry(item.id)}
+          title="delete"
+        >
           <img src={deleteIcon} alt="" className="icon" />
         </span>
       </td>
