@@ -168,38 +168,38 @@ const TableComponent = (props) => {
       </div>
       <div className="container">
         <div className="table-container">
-        <table className="tableStyle">
-          <tr>
-            <th className="checkboxColumn">
-              <input
-                type="checkbox"
-                onClick={selectAll}
-                checked={checkIfAllChecked()}
-              />
-            </th>
-            <th className="fieldColumn">Name</th>
-            <th className="fieldColumn">Email</th>
-            <th className="fieldColumn">Role</th>
-            <th className="actionColumn">Actions</th>
-          </tr>
-          {renderData.map((item, index) =>
-            editRow === item.id ? (
-              <EditableRow
-                item={item}
-                deleteEntry={deleteEntry}
-                submitData={submitData}
-              />
-            ) : (
-              <TableRow
-                item={item}
-                checkRow={checkRow}
-                deleteEntry={deleteEntry}
-                index={index}
-                setEditRow={(id) => setEditRow(id)}
-              />
-            )
-          )}
-        </table>
+          <table className="tableStyle">
+            <tr>
+              <th className="checkboxColumn">
+                <input
+                  type="checkbox"
+                  onClick={selectAll}
+                  checked={checkIfAllChecked()}
+                />
+              </th>
+              <th className="fieldColumn">Name</th>
+              <th className="fieldColumn">Email</th>
+              <th className="fieldColumn">Role</th>
+              <th className="actionColumn">Actions</th>
+            </tr>
+            {renderData.map((item, index) =>
+              editRow === item.id ? (
+                <EditableRow
+                  item={item}
+                  deleteEntry={deleteEntry}
+                  submitData={submitData}
+                />
+              ) : (
+                <TableRow
+                  item={item}
+                  checkRow={checkRow}
+                  deleteEntry={deleteEntry}
+                  index={index}
+                  setEditRow={(id) => setEditRow(id)}
+                />
+              )
+            )}
+          </table>
         </div>
         <div className="actionButtons">
           <div className="deleteButtonContainer">
@@ -212,12 +212,12 @@ const TableComponent = (props) => {
             />
           </div>
           {/* <div className="pagination-div"> */}
-            <Pagination
-              page={page}
-              rowsPerPage={rowsPerPage}
-              length={allData.length}
-              operations={operations}
-            />
+          <Pagination
+            page={page}
+            rowsPerPage={rowsPerPage}
+            length={allData.length}
+            operations={operations}
+          />
           {/* </div> */}
         </div>
       </div>
