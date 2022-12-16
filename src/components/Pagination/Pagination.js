@@ -1,4 +1,5 @@
 import React from "react";
+import PageButton from "./PageButton";
 import "./pagination.css";
 const Pagination = (props) => {
   const { page, rowsPerPage, operations, length } = props;
@@ -13,7 +14,7 @@ const Pagination = (props) => {
         <PageButton onClick={operations.prevPage} disable={page === 0}>
           {"<"}
         </PageButton>
-        {[...Array(totalPage).keys()].map((pageItem, pageIndex) => (
+        {[...Array(totalPage).keys()].map((pageIndex) => (
           <PageButton
             onClick={() => operations.goToPage(pageIndex)}
             active={page === pageIndex}
@@ -39,18 +40,3 @@ const Pagination = (props) => {
 };
 
 export default Pagination;
-
-const PageButton = (props) => {
-  return (
-    <div
-      className={
-        "page-btn " +
-        (props.disable ? "btn-disable " : "") +
-        (props.active ? "btn-active " : "")
-      }
-      onClick={props.onClick}
-    >
-      {props.children}
-    </div>
-  );
-};

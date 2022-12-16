@@ -16,10 +16,10 @@ const TableRow = ({ item, checkRow, deleteEntry, index, setEditRow }) => (
     <td>{item.role}</td>
     <td>
       <span className="edit" onClick={() => setEditRow(item.id)} title="edit">
-        <img src={editIcon} alt="" className="icon"/>
+        <img src={editIcon} alt="edit icon" className="icon"/>
       </span>
       <span className="delete" onClick={() => deleteEntry(item.id)} title="delete">
-        <img src={deleteIcon} alt="" className="icon"/>
+        <img src={deleteIcon} alt="delete icon" className="icon"/>
       </span>
     </td>
   </tr>
