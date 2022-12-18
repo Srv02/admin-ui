@@ -20,22 +20,21 @@ const TableComponent = (props) => {
     searchData();
   }, [masterData]);
 
-  // search logic..
+  useEffect(() => {
+    setNewPageData();
+    setEditRow(null);
+  }, [page]);
 
-  const changeSearchText = (e) => {
-    const text = e.target.value;
-    setSearchText(text.trim());
-  };
+  // search logic..
 
   useEffect(() => {
     searchData();
     setPage(0);
   }, [searchText]);
-
-  useEffect(() => {
-    setNewPageData();
-    setEditRow(null);
-  }, [page]);
+  const changeSearchText = (e) => {
+    const text = e.target.value;
+    setSearchText(text.trim());
+  };
 
   function searchData() {
     const completeData = [...masterData];
@@ -44,10 +43,34 @@ const TableComponent = (props) => {
       if (dataString.includes(searchText.toLowerCase())) {
         return true;
       }
+      return false;
     });
     setAllData(filteredData);
   }
+  // deletion
+  const isDeleteSelectedButtonDisabled = () => {
+    const checked = renderData.filter((item) => item.checked);
+    return checked.length === 0;
+  };
+  const deleteSingleRowData = (id) => {
+    const newData = masterData.filter((item) => item.id !== id);
+    setMasterData(newData);
+  };
+  const deleteMultipleEntry = (ids) => {
+    let newData = [...masterData];
+    newData = newData.filter((item) => !ids.includes(item.id));
+    setMasterData(newData);
+  };
 
+  const deleteSelected = () => {
+    const checked = renderData
+      .filter((item) => item.checked)
+      .map((item) => item.id);
+    //console.log(checked);
+    deleteMultipleEntry(checked);
+  };
+
+  // Pagination logic
   function setNewPageData() {
     if (page * rowsPerPage === allData.length) {
       setPage((newPage) => newPage - 1);
@@ -62,12 +85,6 @@ const TableComponent = (props) => {
       });
     setRenderData(newData);
   }
-
-  const deleteEntry = (id) => {
-    const newData = masterData.filter((item) => item.id !== id);
-    setMasterData(newData);
-  };
-  // Pagination logic
   const nextPage = () => {
     const totalPage = Math.ceil(allData.length / rowsPerPage);
     if (totalPage - page > 1) setPage((newPage) => newPage + 1);
@@ -89,11 +106,11 @@ const TableComponent = (props) => {
     setPage(totalPage - 1);
   };
   const operations = {
-    nextPage: nextPage,
-    prevPage: prevPage,
-    startPage: startPage,
-    endPage: endPage,
-    goToPage: (pageNo) => goToPage(pageNo),
+    nextPage,
+    prevPage,
+    startPage,
+    endPage,
+    goToPage,
   };
 
   // checkbox condition
@@ -119,26 +136,7 @@ const TableComponent = (props) => {
       return true;
     }
   };
-
-  const isDisabled = () => {
-    const checked = renderData.filter((item) => item.checked);
-    return checked.length === 0;
-  };
-
-  const deleteMultipleEntry = (ids) => {
-    let newData = [...masterData];
-    newData = newData.filter((item) => !ids.includes(item.id));
-    setMasterData(newData);
-  };
-
-  const deleteSelected = () => {
-    console.log("coming here ");
-    const checked = renderData
-      .filter((item) => item.checked)
-      .map((item) => item.id);
-    console.log(checked);
-    deleteMultipleEntry(checked);
-  };
+  // for saving the edited row
 
   const submitData = (data) => {
     const { id, name, email, role } = data;
@@ -169,33 +167,37 @@ const TableComponent = (props) => {
       <div className="container">
         <div className="table-container">
           <table className="tableStyle">
-            <tr>
-              <th className="checkboxColumn">
-                <input
-                  type="checkbox"
-                  onClick={selectAll}
-                  checked={checkIfAllChecked()}
-                />
-              </th>
-              <th className="fieldColumn">Name</th>
-              <th className="fieldColumn">Email</th>
-              <th className="fieldColumn">Role</th>
-              <th className="actionColumn">Actions</th>
-            </tr>
+            <tbody>
+              <tr>
+                <th className="checkboxColumn">
+                  <input
+                    type="checkbox"
+                    onChange={selectAll}
+                    checked={checkIfAllChecked()}
+                  />
+                </th>
+                <th className="fieldColumn">Name</th>
+                <th className="fieldColumn">Email</th>
+                <th className="fieldColumn">Role</th>
+                <th className="actionColumn">Actions</th>
+              </tr>
+            </tbody>
             {renderData.map((item, index) =>
               editRow === item.id ? (
                 <EditableRow
                   item={item}
-                  deleteEntry={deleteEntry}
+                  deleteSingleRowData={deleteSingleRowData}
                   submitData={submitData}
+                  key={item.id}
                 />
               ) : (
                 <TableRow
                   item={item}
                   checkRow={checkRow}
-                  deleteEntry={deleteEntry}
+                  deleteSingleRowData={deleteSingleRowData}
                   index={index}
                   setEditRow={(id) => setEditRow(id)}
+                  key={item.id}
                 />
               )
             )}
@@ -206,7 +208,7 @@ const TableComponent = (props) => {
             <input
               type="button"
               className="deleteSelectedBtn"
-              disabled={isDisabled()}
+              disabled={isDeleteSelectedButtonDisabled()}
               onClick={deleteSelected}
               value="Delete Selected"
             />

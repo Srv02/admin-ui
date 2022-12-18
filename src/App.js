@@ -10,11 +10,10 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
       });
   }, []);
-  console.log(data.length);
+
   return (
     <div className="App">
       {data.length ? (

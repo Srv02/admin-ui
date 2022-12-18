@@ -18,6 +18,7 @@ const Pagination = (props) => {
           <PageButton
             onClick={() => operations.goToPage(pageIndex)}
             active={page === pageIndex}
+            key={pageIndex}
           >
             {pageIndex + 1}
           </PageButton>

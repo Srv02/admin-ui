@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import deleteIcon from "../../icons/delete.svg";
 import saveIcon from "../../icons/save.svg";
 import "./style.css";
-const EditableRow = ({ item, submitData, deleteEntry }) => {
+const EditableRow = ({ item, submitData, deleteSingleRowData }) => {
   const [name, setName] = useState(item.name);
   const [email, setEmail] = useState(item.email);
   const [role, setRole] = useState(item.role);
@@ -53,7 +53,7 @@ const EditableRow = ({ item, submitData, deleteEntry }) => {
         </span>
         <span
           className="delete"
-          onClick={() => deleteEntry(item.id)}
+          onClick={() => deleteSingleRowData(item.id)}
           title="delete"
         >
           <img src={deleteIcon} alt="" className="icon" />
